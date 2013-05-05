@@ -1,12 +1,18 @@
 
-#include "Utils/curses.h"
+#include "Interface/Interface.h"
+#include "Interface/CLI/CLI.h"
 
 int main()
 {
-	WINDOW * mainwin;
+	Interface::initialize();
+	Interface::CLI::initialize();
 
-    if ( (mainwin = initscr()) == NULL ) {
-		throw("Error initializing ncurses");
-    }
+	while(true)
+	{
+		Interface::refreshView();
+		Interface::CLI::handleInput();
+	}
+
+
 	return 0;
 }
