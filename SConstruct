@@ -2,6 +2,7 @@
 import os
 import sys
 import re
+import platform
 from subprocess import Popen
 from SConfig import *
 
@@ -42,6 +43,13 @@ if not COMP_INCLUDES_INTO_CCFLAGS:
 env.Append(CFLAGS=C_FLAGS, CXXFLAGS=CXX_FLAGS)
 env.Append(CXXFLAGS=['-std=c++0x'])
 env.Append(CPPPATH=["include"])
+
+if platform.system() == "Windows":
+	LIBRARIES = ['pdcurses']
+elif platform.system() == "Linux":
+	LIBRARIES = ['ncurses']
+LIBRARY_PATHS = ['lib/']
+
 env.Replace(CCFLAGS='') # otherwise we have /nolink in Windows there
 env.Decider(DECIDER)
 env['SHOBJSUFFIX'] = '.o' # SCons otherwise uses .os suffix for Cygwin and MacOS X
