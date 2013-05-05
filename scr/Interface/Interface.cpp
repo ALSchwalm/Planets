@@ -1,6 +1,7 @@
 
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
+#include "Interface/Field.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -16,19 +17,17 @@ namespace Interface
 			throw(std::runtime_error("Error initializing ncurses"));
 	    }
 
-	    keypad(mainwin, true); 	//allow arrow/function keys
-	    //nodelay(mainwin, true);	//do not wait for input
+	    keypad(mainwin, true);
 	    timeout(1);
 	    noecho();	//do not echo user intput to screen
 
 	    CLI::initialize();
+	    Field::initialize();
 	}
-	void refreshView()
+	void refresh()
 	{
-//		if (helpView)
-//			helpView->refreshView();
-//		else
-//			displayView->refreshView();
+		Field::update();
+		wrefresh(Field::fieldWin);
 		wrefresh(CLI::lineWin);
 	}
 

@@ -1,3 +1,5 @@
+#ifndef FLEET_H_
+#define FLEET_H_
 
 namespace Fleet
 {
@@ -19,3 +21,5 @@ namespace Fleet
 		unsigned int population;
 	};
 }
+
+#endif

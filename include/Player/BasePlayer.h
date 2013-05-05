@@ -1,3 +1,6 @@
+#ifndef BASEPLAYER_H_
+#define BASEPLAYER_H_
+
 namespace Player
 {
 	class BasePlayer
@@ -15,3 +18,5 @@ namespace Player
 		float movePercent;
 	};
 }
+
+#endif

@@ -1,4 +1,7 @@
 
+#ifndef AIPLAYER_H_
+#define AIPLAYER_H_
+
 #include "Player/BasePlayer.h"
 
 namespace Player
@@ -11,3 +14,5 @@ namespace Player
 	private:
 	};
 }
+
+#endif

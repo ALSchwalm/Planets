@@ -13,7 +13,7 @@ namespace Interface
 {
 
 	void initialize();
-	void refreshView();
+	void refresh();
 
 	extern WINDOW * mainwin;
 }

@@ -15,11 +15,10 @@ namespace Interface
 
 			CLIwin = subwin(mainwin, 3, COLS, 0, 0);
 			box(CLIwin, 0, 0);
-			refresh();
 			mvaddstr(1, 2, "Command:");
+			wrefresh(CLIwin);
 
 			lineWin = subwin(CLIwin, 1, COLS-12, 1, 11);
-
 		}
 
 		void handleInput()

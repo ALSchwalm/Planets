@@ -1,3 +1,6 @@
+#ifndef HUMANPLAYER_H_
+#define HUMANPLAYER_H_
+
 
 #include "Player/BasePlayer.h"
 
@@ -11,3 +14,5 @@ namespace Player
 	private:
 	};
 }
+
+#endif
