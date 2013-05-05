@@ -1,6 +1,8 @@
 
 #include "Interface/CLI/CLI.h"
+#include "Interface/CLI/Command.h"
 #include <string>
+#include <cstdlib>
 
 namespace Interface
 {
@@ -28,11 +30,11 @@ namespace Interface
 			switch(c)
 			{
 			case 27:	//esc
+				exit(0);
 				break;
 			case 10:	//enter
+				runCommand(line);
 				line="";
-				break;
-			case 9:		//tab
 				break;
 
 			case KEY_BACKSPACE:

@@ -10,8 +10,13 @@ namespace Planet
 			population(0)
 		{}
 
-	void Planet::launchFleet(unsigned int size, Planet* destination)
+	void Planet::launchFleetInt(unsigned int size, Planet* destination)
 	{
 
+	}
+
+	void Planet::launchFleetPercent(float size, Planet* destination)
+	{
+		launchFleetInt(population*size, destination);
 	}
 }

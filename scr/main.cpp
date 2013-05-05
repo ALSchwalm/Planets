@@ -1,4 +1,5 @@
 
+#include "Game/Game.h"
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
 #include <iostream>
@@ -7,6 +8,7 @@ int main()
 {
 	try
 	{
+		Game::setup(1);
 		Interface::initialize();
 
 		while(true)

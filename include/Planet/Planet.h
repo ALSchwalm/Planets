@@ -12,7 +12,8 @@ namespace Planet
 		unsigned int getX() const {return x;}
 		unsigned int getY() const {return y;}
 
-		void launchFleet(unsigned int size, Planet* destination);
+		void launchFleetInt(unsigned int size, Planet* destination);
+		void launchFleetPercent(float size, Planet* destination);
 
 	private:
 		const unsigned int x;
@@ -23,7 +24,8 @@ namespace Planet
 		/*
 		 * How much population can leave a planet in one fleet
 		 */
-		const unsigned int MAX_EGRESS = 10; //TODO read from config
+		static const unsigned int MAX_EGRESS = 10; //TODO read from config
+		static constexpr float GROWTH_RATE = 0.1f;
 	};
 }
 

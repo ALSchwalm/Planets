@@ -14,7 +14,6 @@ namespace Player
 	private:
 	};
 
-	extern BasePlayer* humanPlayer;
 
 }
 
