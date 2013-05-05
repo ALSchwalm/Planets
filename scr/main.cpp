@@ -1,6 +1,7 @@
 
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
+#include <iostream>
 
 int main()
 {
@@ -21,7 +22,7 @@ int main()
 	}
 	catch (...)
 	{
-		std::cerr << "An unknown exception occured." << std::endl;
+		std::cerr << "An unknown exception occurred." << std::endl;
 		return 1;
 	}
 

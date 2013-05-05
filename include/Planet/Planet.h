@@ -7,15 +7,12 @@ namespace Planet
 	class Planet
 	{
 	public:
-		Planet(unsigned int _x, unsigned int _y, const char _letter) :
-			x(_x),
-			y(_y),
-			letter(_letter),
-			population(0)
-		{}
+		Planet(unsigned int _x, unsigned int _y, const char _letter);
 
 		unsigned int getX() const {return x;}
 		unsigned int getY() const {return y;}
+
+		void launchFleet(unsigned int size, Planet* destination);
 
 	private:
 		const unsigned int x;
