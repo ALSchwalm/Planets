@@ -1,5 +1,6 @@
 
 #include "Game/Game.h"
+#include "Time/TimeManager.h"
 #include "Interface/Interface.h"
 #include "Interface/CLI/CLI.h"
 #include <iostream>
@@ -14,6 +15,8 @@ int main()
 
 		while(true)
 		{
+			Time::TimeManager::getInstance().tick();
+			Time::TimeManager::getInstance().capFPS();
 			Interface::refresh();
 			Interface::CLI::handleInput();
 		}

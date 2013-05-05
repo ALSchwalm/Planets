@@ -13,8 +13,8 @@ namespace Fleet
 				Planet::Planet* _source,
 				Planet::Planet* _destination,
 				unsigned int population) :
-				x(source->getX()),
-				y(source->getY()),
+				x(_source->getX()),
+				y(_source->getY()),
 				population(population),
 				owner(_owner),
 				source(_source),

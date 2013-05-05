@@ -34,6 +34,7 @@ namespace Interface
 				break;
 			case 10:	//enter
 				runCommand(line);
+				wclear(lineWin);
 				line="";
 				break;
 

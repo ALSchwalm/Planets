@@ -17,12 +17,12 @@ namespace Interface
 			throw(std::runtime_error("Error initializing ncurses"));
 	    }
 
-	    keypad(mainwin, true);
-	    timeout(1);
-	    noecho();	//do not echo user intput to screen
-
 	    CLI::initialize();
 	    Field::initialize();
+
+	    keypad(mainwin, true);
+	    wtimeout(CLI::lineWin, 1);
+	    noecho();	//do not echo user intput to screen
 	}
 	void refresh()
 	{

@@ -17,10 +17,18 @@ namespace Interface
 
 		void update()
 		{
+			wclear(fieldWin);
+			box(fieldWin, 0, 0);
 			for (auto planet : Game::planets)
 			{
 				mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
 			}
+
+			for (auto fleet : Game::fleets)
+			{
+				mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '.');
+			}
+
 			wrefresh(fieldWin);
 		}
 	}

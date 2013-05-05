@@ -12,6 +12,7 @@ namespace Game
 {
 
 	void setup(unsigned int numAI);
+	void update();
 
 	extern Player::HumanPlayer* player;
 	extern std::vector<Player::AIPlayer*> aiPlayers;
@@ -20,6 +21,7 @@ namespace Game
 	extern std::vector<Planet::Planet*> planets;
 
 	const unsigned int NUM_PLANETS = 15;
+	const unsigned int PLANET_DENSITY = 4;
 }
 
 #endif

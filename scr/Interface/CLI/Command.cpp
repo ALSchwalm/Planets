@@ -1,7 +1,10 @@
 
 #include "Interface/CLI/Command.h"
+#include "Interface/CLI/CLI.h"
 #include <vector>
 #include <sstream>
+
+#include "Game/Game.h" //TODO remove this
 
 namespace Interface
 {
@@ -27,7 +30,7 @@ namespace Interface
 			if (tokens.size() != 2 && tokens.size() != 3)
 				return false;
 
-
+			Game::planets[0]->launchFleetInt(0, Game::planets[1]);
 
 			return true;
 		  }
