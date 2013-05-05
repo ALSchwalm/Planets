@@ -12,6 +12,8 @@ namespace Planet
 		unsigned int getX() const {return x;}
 		unsigned int getY() const {return y;}
 
+		char getLetter() const {return letter;}
+
 		void launchFleetInt(unsigned int size, Planet* destination);
 		void launchFleetPercent(float size, Planet* destination);
 

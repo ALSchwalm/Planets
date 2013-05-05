@@ -6,10 +6,11 @@
 
 int main()
 {
+
 	try
 	{
-		Game::setup(1);
 		Interface::initialize();
+		Game::setup(1);
 
 		while(true)
 		{

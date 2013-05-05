@@ -1,5 +1,6 @@
 
 #include "Interface/Field.h"
+#include "Game/Game.h"
 
 namespace Interface
 {
@@ -16,7 +17,11 @@ namespace Interface
 
 		void update()
 		{
-
+			for (auto planet : Game::planets)
+			{
+				mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
+			}
+			wrefresh(fieldWin);
 		}
 	}
 }
