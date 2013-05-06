@@ -1,6 +1,7 @@
 
 #include "Game/Game.h"
 #include "Interface/Field.h"
+#include "Interface/CLI/CLI.h"
 
 #include <cstdlib>
 #include <time.h>
@@ -70,10 +71,14 @@ namespace Game
 
 	void update()
 	{
+		Interface::Field::update();
+		Interface::CLI::refresh();
+
 		for (auto fleet : fleets)
 		{
 			fleet->move();
 		}
+
 	}
 
 

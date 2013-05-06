@@ -21,14 +21,12 @@ namespace Interface
 	    Field::initialize();
 
 	    keypad(mainwin, true);
-	    wtimeout(CLI::lineWin, 1);
+	    wtimeout(CLI::lineWin, 0);
 	    noecho();	//do not echo user intput to screen
 	}
 	void refresh()
 	{
-		Field::update();
-		wrefresh(Field::fieldWin);
-		wrefresh(CLI::lineWin);
+		CLI::refresh();
 	}
 
 }
