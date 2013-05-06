@@ -17,7 +17,7 @@ namespace Interface
 
 		void update()
 		{
-			wclear(fieldWin);
+			werase(fieldWin);
 			box(fieldWin, 0, 0);
 			for (auto planet : Game::planets)
 			{

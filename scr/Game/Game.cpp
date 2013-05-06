@@ -72,7 +72,6 @@ namespace Game
 	void update()
 	{
 		Interface::Field::update();
-		Interface::CLI::refresh();
 
 		for (auto fleet : fleets)
 		{

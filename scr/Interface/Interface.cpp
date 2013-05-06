@@ -26,7 +26,7 @@ namespace Interface
 	}
 	void refresh()
 	{
-		CLI::refresh();
+		wrefresh(CLI::lineWin);
 	}
 
 }
