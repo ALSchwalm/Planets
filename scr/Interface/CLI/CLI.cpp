@@ -25,7 +25,6 @@ namespace Interface
 
 		void handleInput()
 		{
-
 			int c = wgetch(lineWin);
 
 			switch(c)

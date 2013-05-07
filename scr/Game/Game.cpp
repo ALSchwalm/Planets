@@ -72,6 +72,10 @@ namespace Game
 	void update()
 	{
 		Interface::Field::update();
+#if _WIN32
+		waddstr(Interface::CLI::lineWin, " \b");
+		wrefresh(Interface::CLI::lineWin);
+#endif
 
 		for (auto fleet : fleets)
 		{
