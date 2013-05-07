@@ -26,10 +26,12 @@ namespace Planet
 
 		char getLetter() const {return letter;}
 		Player::BasePlayer* getOwner() const {return owner;}
-		void setOwner(Player::BasePlayer* _owner) {owner = _owner;}
+		void setOwner(Player::BasePlayer* _owner);
 
-		void launchFleetInt(unsigned int size, Planet* destination);
-		void launchFleetPercent(float size, Planet* destination);
+		bool launchFleetInt(Planet* destination, unsigned int size);
+		bool launchFleetInt(Planet* destination);
+		bool launchFleetPercent(Planet* destination, float size);
+		bool launchFleetPercent(Planet* destination);
 
 	private:
 		const unsigned int x;

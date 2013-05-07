@@ -15,6 +15,6 @@ namespace Interface
 	void initialize();
 	void refresh();
 
-	extern WINDOW * mainwin;
+	extern WINDOW* mainwin;
 }
 #endif

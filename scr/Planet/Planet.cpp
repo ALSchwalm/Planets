@@ -20,19 +20,42 @@ namespace Planet
 			population(initialPopulation),
 			owner(nullptr){}
 
-	void Planet::launchFleetInt(unsigned int size, Planet* destination)
+	void Planet::setOwner(Player::BasePlayer* _owner)
 	{
-		if (owner == nullptr)
+		 if (owner != nullptr)
+		 {
+			 owner->removePlanet(this);
+		 }
+		 _owner->addPlanet(this);
+		 owner=_owner;
+	}
+
+	bool Planet::launchFleetInt(Planet* destination, unsigned int size)
+	{
+		if (owner == nullptr or size > population)
 		{
-			throw(std::runtime_error("Attempt to launch fleet from unowned planet"));
+			return false;
 		}
+
+		population-=size;
 		Fleet::Fleet* newFleet = new Fleet::Fleet(owner, this, destination, size);
 		Game::fleets.push_back(newFleet);
 		owner->addFleet(newFleet);
+		return true;
 	}
 
-	void Planet::launchFleetPercent(float size, Planet* destination)
+	bool Planet::launchFleetInt(Planet* destination)
 	{
-		launchFleetInt(population*size, destination);
+		return launchFleetInt(destination, population*owner->getMovePercent());
+	}
+
+	bool Planet::launchFleetPercent(Planet* destination)
+	{
+		return launchFleetInt(destination, population*owner->getMovePercent());
+	}
+
+	bool Planet::launchFleetPercent(Planet* destination, float size)
+	{
+		return launchFleetInt(destination, population*size);
 	}
 }

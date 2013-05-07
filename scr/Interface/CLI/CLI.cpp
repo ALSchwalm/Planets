@@ -8,8 +8,8 @@ namespace Interface
 {
 	namespace CLI
 	{
-		WINDOW * CLIwin;
-		WINDOW * lineWin;
+		WINDOW* CLIwin;
+		WINDOW* lineWin;
 		std::string line;
 
 		void initialize()
@@ -30,6 +30,7 @@ namespace Interface
 			switch(c)
 			{
 			case 27:	//esc
+				endwin();
 				exit(0);
 				break;
 			case 10:	//enter

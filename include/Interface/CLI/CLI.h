@@ -16,8 +16,8 @@ namespace Interface
 	{
 
 		void initialize();
-		extern WINDOW * CLIwin;
-		extern WINDOW *	lineWin;
+		extern WINDOW* CLIwin;
+		extern WINDOW*	lineWin;
 		void handleInput();
 	}
 }
