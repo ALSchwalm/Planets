@@ -62,9 +62,12 @@ namespace Game
 				temp_y = rand()%(temp_y-2)+1;
 			} while (!validPosition(temp_x, temp_y));
 
-			planets.push_back(new Planet::Planet(temp_x, temp_y,  planet+65));
+			unsigned int initial_pop = (rand()%(MAX_INITIAL_POP - MIN_INITIAL_POP))+MIN_INITIAL_POP;
+
+			planets.push_back(new Planet::Planet(temp_x, temp_y,  planet+65, initial_pop));
 		}
 		planets[0]->setOwner(player);
+		planets[0]->setPopulation(PLAYER_STARTING_POP);
 
 
 	}

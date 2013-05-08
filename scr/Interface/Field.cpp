@@ -21,7 +21,10 @@ namespace Interface
 			box(fieldWin, 0, 0);
 			for (auto planet : Game::planets)
 			{
+				if (planet->getOwner() == Game::player)
+					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_STANDOUT  , 0, NULL);
 				mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
+
 			}
 
 			for (auto fleet : Game::fleets)

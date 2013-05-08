@@ -27,6 +27,7 @@ namespace Planet
 		char getLetter() const {return letter;}
 		Player::BasePlayer* getOwner() const {return owner;}
 		void setOwner(Player::BasePlayer* _owner);
+		void setPopulation(unsigned int _population) {population = _population;}
 
 		bool launchFleetInt(Planet* destination, unsigned int size);
 		bool launchFleetInt(Planet* destination);

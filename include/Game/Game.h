@@ -22,6 +22,9 @@ namespace Game
 
 	const unsigned int NUM_PLANETS = 15;
 	const unsigned int PLANET_DENSITY = 4;
+	const unsigned int MAX_INITIAL_POP = 75;
+	const unsigned int MIN_INITIAL_POP = 5;
+	const unsigned int PLAYER_STARTING_POP = 100;
 }
 
 #endif
