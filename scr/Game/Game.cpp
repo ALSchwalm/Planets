@@ -19,6 +19,10 @@ namespace Game
 	std::vector<Fleet::Fleet*> fleets;
 	std::vector<Planet::Planet*> planets;
 
+	/*
+	 * Guarantee planets are not very close together
+	 */
+
 	static bool validPosition(unsigned int x, unsigned int y)
 	{
 		for (auto planet : planets)
@@ -64,9 +68,10 @@ namespace Game
 
 			unsigned int initial_pop = (rand()%(MAX_INITIAL_POP - MIN_INITIAL_POP))+MIN_INITIAL_POP;
 
-			planets.push_back(new Planet::Planet(temp_x, temp_y,  planet+65, initial_pop));
+			planets.push_back(new Planet::Planet(temp_x, temp_y,  planet+97, initial_pop));
 		}
 		planets[0]->setOwner(player);
+		planets[0]->setLetter('A');
 		planets[0]->setPopulation(PLAYER_STARTING_POP);
 
 
@@ -83,10 +88,29 @@ namespace Game
 		for (auto fleet = fleets.begin(); fleet != fleets.end(); )
 		{
 			auto fleet_ptr = *(fleet);
+
+			/*
+			 * Fleet::move() returns true when a fleet has reached its destination
+			 */
+
 			if(fleet_ptr->move())
 			{
 				Planet::Planet* tempDestination = fleet_ptr->getDestination();
-				tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
+				if (tempDestination->getOwner() != fleet_ptr->getOwner())	//If the destination is enemy/neutral
+				{
+					if (fleet_ptr->getPopulation() > tempDestination->getPopulation()) //If the planet has been taken
+					{
+
+						tempDestination->setPopulation(fleet_ptr->getPopulation() - tempDestination->getPopulation());
+						tempDestination->setOwner(fleet_ptr->getOwner()); //This also sets the letter/capitalization
+					}
+					else	//The planet has not been taken
+					{
+						tempDestination->setPopulation(tempDestination->getPopulation() - fleet_ptr->getPopulation());
+					}
+				}
+				else
+					tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
 				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
 				fleet = fleets.erase(std::remove(fleets.begin(), fleets.end(), fleet_ptr));
 			}

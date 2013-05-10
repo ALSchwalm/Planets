@@ -30,6 +30,10 @@ namespace Planet
 		 }
 		 _owner->addPlanet(this);
 		 owner=_owner;
+		 if (owner == Game::player)
+				letter = toupper(letter);
+		else
+				letter = tolower(letter);
 	}
 
 	void Planet::grow()

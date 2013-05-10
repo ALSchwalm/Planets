@@ -27,8 +27,10 @@ namespace Planet
 		char getLetter() const {return letter;}
 		unsigned int getPopulation() const {return population;}
 		Player::BasePlayer* getOwner() const {return owner;}
+
 		void setOwner(Player::BasePlayer* _owner);
 		void setPopulation(unsigned int _population) {population = _population;}
+		void setLetter(const char _letter) {letter = _letter;}
 
 		void grow();
 
@@ -40,7 +42,7 @@ namespace Planet
 	private:
 		const unsigned int x;
 		const unsigned int y;
-		const char letter;
+		char letter;
 		unsigned int population;
 		Player::BasePlayer* owner;
 

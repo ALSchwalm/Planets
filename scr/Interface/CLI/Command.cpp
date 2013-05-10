@@ -36,7 +36,8 @@ namespace Interface
 			Planet::Planet* destination_planet = nullptr;
 			for (auto planet : Game::player->getPlanets())
 			{
-				if (planet->getLetter() == tokens[0].c_str()[0])
+				if (planet->getLetter() == tokens[0].c_str()[0] or
+						planet->getLetter() == toupper(tokens[0].c_str()[0]))
 				{
 					source_planet = planet;
 					break;
@@ -44,7 +45,8 @@ namespace Interface
 			}
 			for (auto planet : Game::planets)
 			{
-				if (planet->getLetter() == tokens[1].c_str()[0])
+				if (planet->getLetter() == tokens[1].c_str()[0] or
+						toupper(planet->getLetter()) == tokens[1].c_str()[0])
 				{
 					destination_planet = planet;
 					break;
@@ -58,7 +60,10 @@ namespace Interface
 
 			if (tokens.size() == 3)
 			{
-				if (atoi(tokens[2].c_str()) == 0)
+				/*
+				 * atoi returns false if the conversion is invalid
+				 */
+				if (!atoi(tokens[2].c_str()))
 					return false;
 				else if (tokens[2][0] == '.')
 					source_planet->launchFleetPercent(destination_planet, atoi(tokens[2].c_str()));
