@@ -24,6 +24,7 @@ namespace Fleet
 		unsigned int getX() const {return x;}
 		unsigned int getY() const {return y;}
 		unsigned int getSize() const {return population;}
+		unsigned int getPopulation() const {return population;}
 
 		Player::BasePlayer* getOwner() const {return owner;}
 		Planet::Planet* getSource() const {return source;}

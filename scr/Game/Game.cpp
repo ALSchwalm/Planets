@@ -80,9 +80,20 @@ namespace Game
 		wrefresh(Interface::CLI::lineWin);
 #endif
 
-		for (auto fleet : fleets)
+		for (auto fleet = fleets.begin(); fleet != fleets.end(); )
 		{
-			fleet->move();
+			auto fleet_ptr = *(fleet);
+			if(fleet_ptr->move())
+			{
+				Planet::Planet* tempDestination = fleet_ptr->getDestination();
+				tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
+				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
+				fleet = fleets.erase(std::remove(fleets.begin(), fleets.end(), fleet_ptr));
+			}
+			else
+			{
+				++fleet;
+			}
 		}
 
 	}

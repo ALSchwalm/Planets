@@ -25,6 +25,7 @@ namespace Planet
 		unsigned int getY() const {return y;}
 
 		char getLetter() const {return letter;}
+		unsigned int getPopulation() const {return population;}
 		Player::BasePlayer* getOwner() const {return owner;}
 		void setOwner(Player::BasePlayer* _owner);
 		void setPopulation(unsigned int _population) {population = _population;}
