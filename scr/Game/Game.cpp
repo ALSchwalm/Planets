@@ -113,6 +113,7 @@ namespace Game
 					tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
 				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
 				fleet = fleets.erase(std::remove(fleets.begin(), fleets.end(), fleet_ptr));
+				delete fleet_ptr;
 			}
 			else
 			{
@@ -123,6 +124,7 @@ namespace Game
 		for (auto planet : planets)
 		{
 			planet->grow();
+			planet->launchFleet();
 		}
 
 	}

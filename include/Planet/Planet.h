@@ -3,6 +3,13 @@
 #define PLANET_H_
 
 #include "Player/BasePlayer.h"
+#include <queue>
+
+namespace Fleet
+{
+	class Fleet;
+}
+
 
 namespace Planet
 {
@@ -34,10 +41,20 @@ namespace Planet
 
 		void grow();
 
+		/*
+		 * Launch the oldest fleet in the fleetQueue
+		 */
+		void launchFleet();
+
+		/*
+		 * These command create the fleet and store them in the fleetQueue
+		 */
 		bool launchFleetInt(Planet* destination, unsigned int size);
 		bool launchFleetInt(Planet* destination);
 		bool launchFleetPercent(Planet* destination, float size);
 		bool launchFleetPercent(Planet* destination);
+
+
 
 	private:
 		const unsigned int x;
@@ -53,6 +70,10 @@ namespace Planet
 		 */
 		float partialPopulation;
 
+		/*
+		 * Stores the fleets created when a user launches population > MAX_EGRESS
+		 */
+		std::queue<Fleet::Fleet*> fleetQueue;
 		/*
 		 * How much population can leave a planet in one fleet
 		 */

@@ -9,10 +9,10 @@ namespace Fleet
 	{
 		const std::vector<std::pair<int, int> > directions
 		{
-			std::pair<int, int>(0, 1),
-			std::pair<int, int>(0, -1),
-			std::pair<int, int>(1, 0),
-			std::pair<int, int>(-1, 0)
+			std::pair<const int, const int>(0, 1),
+			std::pair<const int, const int>(0, -1),
+			std::pair<const int, const int>(1, 0),
+			std::pair<const int, const int>(-1, 0)
 		};
 	}
 
