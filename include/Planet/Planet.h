@@ -37,7 +37,6 @@ namespace Planet
 
 		void setOwner(Player::BasePlayer* _owner);
 		void setPopulation(unsigned int _population) {population = _population;}
-		void setLetter(const char _letter) {letter = _letter;}
 
 		void grow();
 

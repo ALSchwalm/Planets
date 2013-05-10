@@ -22,7 +22,6 @@ namespace Game
 	/*
 	 * Guarantee planets are not very close together
 	 */
-
 	static bool validPosition(unsigned int x, unsigned int y)
 	{
 		for (auto planet : planets)
@@ -52,8 +51,8 @@ namespace Game
 
 		for (unsigned int planet; planet < NUM_PLANETS; ++planet)
 		{
-			unsigned int temp_x, temp_y;
-			getmaxyx(Interface::Field::fieldWin, temp_x, temp_y);
+			unsigned int max_x, max_y, temp_x, temp_y;
+			getmaxyx(Interface::Field::fieldWin, max_x, max_y);
 
 			/*
 			 * For reasons I cannot explain. This fails if I perform the
@@ -62,8 +61,8 @@ namespace Game
 			 */
 			do
 			{
-				temp_x = rand()%(temp_x-2)+1;
-				temp_y = rand()%(temp_y-2)+1;
+				temp_x = rand()%(max_x-2)+1;
+				temp_y = rand()%(max_y-6)+3;
 			} while (!validPosition(temp_x, temp_y));
 
 			unsigned int initial_pop = (rand()%(MAX_INITIAL_POP - MIN_INITIAL_POP))+MIN_INITIAL_POP;
@@ -71,7 +70,6 @@ namespace Game
 			planets.push_back(new Planet::Planet(temp_x, temp_y,  planet+97, initial_pop));
 		}
 		planets[0]->setOwner(player);
-		planets[0]->setLetter('A');
 		planets[0]->setPopulation(PLAYER_STARTING_POP);
 
 

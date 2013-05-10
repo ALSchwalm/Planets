@@ -27,6 +27,11 @@ namespace Interface
 
 		static const std::vector<Planet::Planet*> getSources(std::string sourceList)
 		{
+			if (sourceList == "all")
+			{
+				return Game::player->getPlanets();
+			}
+
 			std::vector<Planet::Planet*> sources;
 			for (auto letter : sourceList)
 			{
@@ -57,17 +62,6 @@ namespace Interface
 
 		std::vector<Planet::Planet*> sources = getSources(tokens[0]);
 
-//		Planet::Planet* source_planet = nullptr;
-//
-//		for (auto planet : Game::player->getPlanets())
-//		{
-//			if (planet->getLetter() == tokens[0].c_str()[0] or
-//					planet->getLetter() == toupper(tokens[0].c_str()[0]))
-//			{
-//				source_planet = planet;
-//				break;
-//			}
-//		}
 		Planet::Planet* destination_planet = nullptr;
 		for (auto planet : Game::planets)
 		{
