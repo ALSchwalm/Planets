@@ -58,7 +58,7 @@ namespace Planet
 	{
 		Fleet::Fleet* newFleet = nullptr;
 
-		if (owner == nullptr or size > population)
+		if (owner == nullptr or size > population or size==0)
 		{
 			return false;
 		}
