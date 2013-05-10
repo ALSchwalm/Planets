@@ -30,6 +30,8 @@ namespace Planet
 		void setOwner(Player::BasePlayer* _owner);
 		void setPopulation(unsigned int _population) {population = _population;}
 
+		void grow();
+
 		bool launchFleetInt(Planet* destination, unsigned int size);
 		bool launchFleetInt(Planet* destination);
 		bool launchFleetPercent(Planet* destination, float size);
@@ -43,10 +45,17 @@ namespace Planet
 		Player::BasePlayer* owner;
 
 		/*
+		 * In all other cases, population should be an int. However, there
+		 * must be a variable to hold the >1 population growth that occurs per
+		 * tick.
+		 */
+		float partialPopulation;
+
+		/*
 		 * How much population can leave a planet in one fleet
 		 */
 		static const unsigned int MAX_EGRESS = 10; //TODO read from config
-		static constexpr float GROWTH_RATE = 0.1f;
+		static constexpr float GROWTH_RATE = 0.03f;
 	};
 }
 

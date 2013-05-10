@@ -96,6 +96,11 @@ namespace Game
 			}
 		}
 
+		for (auto planet : planets)
+		{
+			planet->grow();
+		}
+
 	}
 
 

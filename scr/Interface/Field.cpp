@@ -1,6 +1,7 @@
 
 #include "Interface/Field.h"
 #include "Game/Game.h"
+#include <cstdlib>
 
 namespace Interface
 {
@@ -24,6 +25,9 @@ namespace Interface
 				if (planet->getOwner() == Game::player)
 					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_STANDOUT  , 0, NULL);
 				mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
+				char populationBuffer[10];
+				sprintf(populationBuffer, "%d", planet->getPopulation());
+				waddstr(fieldWin, populationBuffer);
 
 			}
 

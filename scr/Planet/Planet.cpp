@@ -11,14 +11,16 @@ namespace Planet
 			y(_y),
 			letter(_letter),
 			population(initialPopulation),
-			owner(_owner){}
+			owner(_owner),
+			partialPopulation(0.0f){}
 
 	Planet::Planet(unsigned int _x, unsigned int _y, const char _letter, unsigned int initialPopulation) :
 			x(_x),
 			y(_y),
 			letter(_letter),
 			population(initialPopulation),
-			owner(nullptr){}
+			owner(nullptr),
+			partialPopulation(0.0f){}
 
 	void Planet::setOwner(Player::BasePlayer* _owner)
 	{
@@ -29,6 +31,15 @@ namespace Planet
 		 _owner->addPlanet(this);
 		 owner=_owner;
 	}
+
+	void Planet::grow()
+	{
+		partialPopulation += GROWTH_RATE;
+		if (partialPopulation > 1)
+			population += static_cast<int>(partialPopulation);
+			partialPopulation -= static_cast<int>(partialPopulation);
+	}
+
 
 	bool Planet::launchFleetInt(Planet* destination, unsigned int size)
 	{
