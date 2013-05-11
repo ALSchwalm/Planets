@@ -12,6 +12,8 @@ int main()
 	{
 		Interface::initialize();
 		Game::setup();
+		Game::update();
+		Interface::pause();
 
 		while(true)
 		{

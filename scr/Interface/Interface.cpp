@@ -24,6 +24,15 @@ namespace Interface
 	    wtimeout(CLI::lineWin, 0);
 	    noecho();	//do not echo user intput to screen
 	}
+
+	void pause()
+	{
+		waddstr(CLI::lineWin, "Press any key to begin.");
+		wrefresh(CLI::lineWin);
+		getch();
+		wclear(CLI::lineWin);
+	}
+
 	void refresh()
 	{
 		wrefresh(CLI::lineWin);
