@@ -27,6 +27,7 @@ namespace Game
 	const unsigned int MAX_INITIAL_POP = 75;
 	const unsigned int MIN_INITIAL_POP = 5;
 	const unsigned int PLAYER_STARTING_POP = 100;
+	const unsigned int AI_STARTING_POP = 100;
 }
 
 #endif

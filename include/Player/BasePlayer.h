@@ -35,7 +35,7 @@ namespace Player
 		void removeFleet(Fleet::Fleet* fleet) { fleets.erase(std::remove(fleets.begin(), fleets.end(), fleet));}
 
 
-	private:
+	protected:
 		const unsigned int ID;
 		float movePercent;
 		std::vector<Planet::Planet*> planets;

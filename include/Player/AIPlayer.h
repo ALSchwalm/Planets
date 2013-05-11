@@ -11,7 +11,11 @@ namespace Player
 	public:
 		AIPlayer(unsigned int _ID);
 
+		void move();
+
 	private:
+		Planet::Planet* getSmallestPlanet();
+		Planet::Planet* getClosestPlanet(Planet::Planet*);
 	};
 }
 

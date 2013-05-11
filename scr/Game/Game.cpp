@@ -79,6 +79,7 @@ namespace Game
 		{
 			std::advance(planet, 1);
 			(*planet)->setOwner(aiPlayer);
+			(*planet)->setPopulation(AI_STARTING_POP);
 		}
 
 	}
@@ -125,6 +126,11 @@ namespace Game
 		{
 			planet->grow();
 			planet->launchFleet();
+		}
+
+		for (auto aiPlayer : aiPlayers)
+		{
+			aiPlayer->move();
 		}
 
 		Interface::Field::update();
