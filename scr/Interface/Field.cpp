@@ -32,12 +32,13 @@ namespace Interface
 				char populationBuffer[10];
 				sprintf(populationBuffer, "%d", planet->getPopulation());
 				waddstr(fieldWin, populationBuffer);
-
 			}
 
 			for (auto fleet : Game::fleets)
 			{
-				if (! (mvwinch(fieldWin, fleet->getX(), fleet->getY() ) == '.'))
+				if (fleet->getOwner() == Game::player)
+					mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '*');
+				else
 					mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '.');
 			}
 
