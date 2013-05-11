@@ -25,7 +25,7 @@ namespace Time
         double timeRemainder;
 
         static const unsigned int MAX_FPS = 100;
-        static const unsigned int UPDATES_PER_SECOND = 1;
+        static const unsigned int UPDATES_PER_SECOND = 10;
 
 	};
 }

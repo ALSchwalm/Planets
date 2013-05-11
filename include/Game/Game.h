@@ -7,6 +7,7 @@
 #include "Fleet/Fleet.h"
 #include "Planet/Planet.h"
 #include <vector>
+#include <set>
 
 namespace Game
 {
@@ -17,8 +18,8 @@ namespace Game
 	extern Player::HumanPlayer* player;
 	extern std::vector<Player::AIPlayer*> aiPlayers;
 
-	extern std::vector<Fleet::Fleet*> fleets;
-	extern std::vector<Planet::Planet*> planets;
+	extern std::set<Fleet::Fleet*> fleets;
+	extern std::set<Planet::Planet*> planets;
 
 	const unsigned int NUM_PLANETS = 15;
 	const unsigned int NUM_AI_PLAYERS = 1;

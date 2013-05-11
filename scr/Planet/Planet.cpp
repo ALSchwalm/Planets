@@ -48,7 +48,7 @@ namespace Planet
 	{
 		if (fleetQueue.size() > 0)
 		{
-			Game::fleets.push_back(fleetQueue.front());
+			Game::fleets.insert(fleetQueue.front());
 			owner->addFleet(fleetQueue.front());
 			fleetQueue.pop();
 		}

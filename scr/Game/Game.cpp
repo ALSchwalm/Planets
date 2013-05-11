@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <stdexcept>
+
 #if _WIN32
 # include "Utils/curses.h"
 #elif __linux__
@@ -16,8 +17,8 @@ namespace Game
 {
 	Player::HumanPlayer* player = nullptr;
 	std::vector<Player::AIPlayer*> aiPlayers;
-	std::vector<Fleet::Fleet*> fleets;
-	std::vector<Planet::Planet*> planets;
+	std::set<Fleet::Fleet*> fleets;
+	std::set<Planet::Planet*> planets;
 
 	/*
 	 * Guarantee planets are not very close together
@@ -67,10 +68,10 @@ namespace Game
 
 			unsigned int initial_pop = (rand()%(MAX_INITIAL_POP - MIN_INITIAL_POP))+MIN_INITIAL_POP;
 
-			planets.push_back(new Planet::Planet(temp_x, temp_y,  planet+97, initial_pop));
+			planets.insert(new Planet::Planet(temp_x, temp_y,  planet+97, initial_pop));
 		}
-		planets[0]->setOwner(player);
-		planets[0]->setPopulation(PLAYER_STARTING_POP);
+		(*planets.begin())->setOwner(player);
+		(*planets.begin())->setPopulation(PLAYER_STARTING_POP);
 
 
 	}
@@ -104,8 +105,8 @@ namespace Game
 				else
 					tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
 				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
-				fleet = fleets.erase(std::remove(fleets.begin(), fleets.end(), fleet_ptr));
-				delete fleet_ptr;
+				fleet = fleets.erase(std::find(fleets.begin(), fleets.end(), fleet_ptr));
+				//delete fleet_ptr;
 			}
 			else
 			{
