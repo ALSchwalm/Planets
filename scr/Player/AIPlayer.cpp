@@ -1,7 +1,7 @@
 
 #include "Player/AIPlayer.h"
 #include "Game/Game.h"
-#include "Utils/pathing.h"
+#include "Utils/Pathing.h"
 #include <algorithm>
 
 namespace Player
