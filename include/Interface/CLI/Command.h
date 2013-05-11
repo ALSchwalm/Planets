@@ -8,7 +8,7 @@ namespace Interface
 	namespace CLI
 	{
 		  bool runCommand(std::string command);
-
+		  extern std::string prevCommand;
 	}
 }
 

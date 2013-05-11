@@ -12,6 +12,8 @@ namespace Interface
 {
 	namespace CLI
 	{
+		std::string prevCommand = "";
+
 		static std::vector<std::string> tokenize(std::string command)
 		{
 			std::string buf;
@@ -48,57 +50,63 @@ namespace Interface
 
 		bool runCommand(std::string command)
 		{
-		  std::vector<std::string> tokens = tokenize(command);
 
-		/*
-		 * Valid commands are of the form:
-		 * 	source(s) destination number_of_ships
-		 * 	source(s) destination percent_of_ships
-		 * 	or
-		 * 	source destination  <--- Where the percent_of_ships will be the default
-		 */
-		if (tokens.size() != 2 && tokens.size() != 3)
-			return false;
+			if (command == "-")
+				command = prevCommand;
 
-		std::vector<Planet::Planet*> sources = getSources(tokens[0]);
+			std::vector<std::string> tokens = tokenize(command);
 
-		Planet::Planet* destination_planet = nullptr;
-		for (auto planet : Game::planets)
-		{
-			if (tolower(planet->getLetter()) == tolower(tokens[1].c_str()[0]))
+			/*
+			* Valid commands are of the form:
+			* 	source(s) destination number_of_ships
+			* 	source(s) destination percent_of_ships
+			* 	or
+			* 	source destination  <--- Where the percent_of_ships will be the default
+			*/
+			if (tokens.size() != 2 && tokens.size() != 3)
+				return false;
+
+			std::vector<Planet::Planet*> sources = getSources(tokens[0]);
+
+			Planet::Planet* destination_planet = nullptr;
+			for (auto planet : Game::planets)
 			{
-				destination_planet = planet;
-				break;
+				if (tolower(planet->getLetter()) == tolower(tokens[1].c_str()[0]))
+				{
+					destination_planet = planet;
+					break;
+				}
 			}
-		}
 
-		if (sources.size() < 1 or !destination_planet)
-		{
-			return false;
-		}
-
-		if (tokens.size() == 3)
-		{
-			for (auto source_planet : sources)
+			if (sources.size() < 1 or !destination_planet)
 			{
-				/*
-				 * atoi returns false if the conversion is invalid
-				 */
-				if (!atoi(tokens[2].c_str()))
-					return false;
-				else if (tokens[2][0] == '.')
-					source_planet->launchFleetPercent(destination_planet, atoi(tokens[2].c_str()));
-				else
-					source_planet->launchFleetInt(destination_planet, atoi(tokens[2].c_str()));
+				return false;
 			}
-		}
-		else
-		{
-			for (auto source_planet : sources)
-				source_planet->launchFleetInt(destination_planet);
-		}
 
-		return true;
+			prevCommand = command;
+
+			if (tokens.size() == 3)
+			{
+				for (auto source_planet : sources)
+				{
+					/*
+					 * atoi returns false if the conversion is invalid
+					 */
+					if (!atoi(tokens[2].c_str()))
+						return false;
+					else if (tokens[2][0] == '.')
+						source_planet->launchFleetPercent(destination_planet, atoi(tokens[2].c_str()));
+					else
+						source_planet->launchFleetInt(destination_planet, atoi(tokens[2].c_str()));
+				}
+			}
+			else
+			{
+				for (auto source_planet : sources)
+					source_planet->launchFleetInt(destination_planet);
+			}
+
+			return true;
 		}
 	}
 }
