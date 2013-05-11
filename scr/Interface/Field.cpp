@@ -23,8 +23,12 @@ namespace Interface
 			for (auto planet : Game::planets)
 			{
 				if (planet->getOwner() == Game::player)
-					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_STANDOUT  , 0, NULL);
+					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_STANDOUT, 0, NULL);
+				else if (planet->getOwner() != nullptr)
+					mvwaddch(fieldWin, planet->getX(), planet->getY()-1, '_');
+
 				mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
+
 				char populationBuffer[10];
 				sprintf(populationBuffer, "%d", planet->getPopulation());
 				waddstr(fieldWin, populationBuffer);

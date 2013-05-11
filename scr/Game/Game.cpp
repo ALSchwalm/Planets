@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <time.h>
 #include <stdexcept>
+#include <algorithm>
 
 #if _WIN32
 # include "Utils/curses.h"
@@ -73,6 +74,12 @@ namespace Game
 		(*planets.begin())->setOwner(player);
 		(*planets.begin())->setPopulation(PLAYER_STARTING_POP);
 
+		auto planet = planets.begin();
+		for(auto aiPlayer : aiPlayers)
+		{
+			std::advance(planet, 1);
+			(*planet)->setOwner(aiPlayer);
+		}
 
 	}
 
@@ -106,7 +113,7 @@ namespace Game
 					tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
 				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
 				fleet = fleets.erase(std::find(fleets.begin(), fleets.end(), fleet_ptr));
-				//delete fleet_ptr;
+				delete fleet_ptr;
 			}
 			else
 			{
