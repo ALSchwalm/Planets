@@ -11,7 +11,7 @@ int main()
 	try
 	{
 		Interface::initialize();
-		Game::setup(1);
+		Game::setup();
 
 		while(true)
 		{

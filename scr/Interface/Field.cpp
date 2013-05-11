@@ -33,7 +33,8 @@ namespace Interface
 
 			for (auto fleet : Game::fleets)
 			{
-				mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '.');
+				if (! (mvwinch(fieldWin, fleet->getX(), fleet->getY() ) == '.'))
+					mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '.');
 			}
 
 			wrefresh(fieldWin);

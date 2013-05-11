@@ -65,8 +65,7 @@ namespace Interface
 		Planet::Planet* destination_planet = nullptr;
 		for (auto planet : Game::planets)
 		{
-			if (planet->getLetter() == tokens[1].c_str()[0] or
-					toupper(planet->getLetter()) == tokens[1].c_str()[0])
+			if (tolower(planet->getLetter()) == tolower(tokens[1].c_str()[0]))
 			{
 				destination_planet = planet;
 				break;

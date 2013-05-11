@@ -57,6 +57,7 @@ namespace Planet
 	bool Planet::launchFleetInt(Planet* destination, unsigned int size)
 	{
 		Fleet::Fleet* newFleet = nullptr;
+		auto size_holder = size;
 
 		if (owner == nullptr or size > population or size==0)
 		{
@@ -64,14 +65,14 @@ namespace Planet
 		}
 		else if (size > MAX_EGRESS)
 		{
-			for (unsigned int i = 0; i < static_cast<float>(size)/MAX_EGRESS; ++i)
+			for (; size > MAX_EGRESS; size-=10)
 			{
 				newFleet = new Fleet::Fleet(owner, this, destination, MAX_EGRESS);
 				fleetQueue.push(newFleet);
 			}
-			if (size%MAX_EGRESS > 0)
+			if (size > 0)
 			{
-				newFleet = new Fleet::Fleet(owner, this, destination, size%MAX_EGRESS);
+				newFleet = new Fleet::Fleet(owner, this, destination, size);
 				fleetQueue.push(newFleet);
 			}
 		}
@@ -80,7 +81,7 @@ namespace Planet
 			newFleet = new Fleet::Fleet(owner, this, destination, size);
 			fleetQueue.push(newFleet);
 		}
-		population-=size;
+		population-=size_holder;
 
 
 		return true;

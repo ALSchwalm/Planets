@@ -34,17 +34,17 @@ namespace Game
 	}
 
 
-	void setup(unsigned int numAI)
+	void setup()
 	{
 		srand (time(NULL));
 
-		if (NUM_PLANETS < numAI + 1)
+		if (NUM_PLANETS < NUM_AI_PLAYERS + 1)
 		{
 			throw(std::runtime_error("Insufficient planets for number of players."));
 		}
 
 		Game::player = new Player::HumanPlayer(0);
-		for (unsigned int ID=1; ID < numAI+1; ++ID)
+		for (unsigned int ID=1; ID < NUM_AI_PLAYERS+1; ++ID)
 		{
 			aiPlayers.push_back(new Player::AIPlayer(ID));
 		}
@@ -77,12 +77,6 @@ namespace Game
 
 	void update()
 	{
-		Interface::Field::update();
-#if _WIN32
-		waddstr(Interface::CLI::lineWin, " \b");
-		wrefresh(Interface::CLI::lineWin);
-#endif
-
 		for (auto fleet = fleets.begin(); fleet != fleets.end(); )
 		{
 			auto fleet_ptr = *(fleet);
@@ -124,6 +118,12 @@ namespace Game
 			planet->grow();
 			planet->launchFleet();
 		}
+
+		Interface::Field::update();
+#if _WIN32
+		waddstr(Interface::CLI::lineWin, " \b");
+		wrefresh(Interface::CLI::lineWin);
+#endif
 
 	}
 
