@@ -124,7 +124,8 @@ namespace Game
 
 		for (auto planet : planets)
 		{
-			planet->grow();
+			if (planet->getOwner() != nullptr)
+				planet->grow();
 			planet->launchFleet();
 		}
 

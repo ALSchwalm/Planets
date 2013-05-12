@@ -17,6 +17,11 @@ namespace Interface
 			throw(std::runtime_error("Error initializing ncurses"));
 	    }
 
+	    if (has_colors())
+	    {
+	    	start_color();
+	    	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+	    }
 	    CLI::initialize();
 	    Field::initialize();
 

@@ -23,7 +23,10 @@ namespace Interface
 			for (auto planet : Game::planets)
 			{
 				if (planet->getOwner() == Game::player)
-					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_STANDOUT, 0, NULL);
+				{
+					attron(COLOR_PAIR(1));
+					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_BLINK, 1, NULL);
+				}
 				else if (planet->getOwner() != nullptr)
 					mvwaddch(fieldWin, planet->getX(), planet->getY()-1, '_');
 
