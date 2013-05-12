@@ -145,21 +145,15 @@ namespace Game
 			aiPlayer->move();
 		}
 
-		//copy elements to a vector so we can remove_if
-		std::vector<Planet::Planet*> tempPlanets(planets.begin(), planets.end());
+		//find first non-neutral planet with different owner than the first
+		auto firstOtherPlanet = std::find_if(planets.begin(), planets.end(),
+				[&](Planet::Planet* planet){return (planet->getOwner() != (*planets.begin())->getOwner()) and
+						(planet->getOwner() != nullptr);});
 
-		//remove all neutral planets
-		auto firstNull = std::remove_if(tempPlanets.begin(), tempPlanets.end(),
-				[](Planet::Planet* planet){return planet->getOwner() == nullptr;});
-
-		//find first planet with different owner than the first
-		auto firstOtherPlanet = std::find_if(tempPlanets.begin(), firstNull,
-				[&](Planet::Planet* planet){return planet->getOwner() != (*tempPlanets.begin())->getOwner();});
-
-		//if the first other planet is neutral, the game if over
-		if (firstOtherPlanet == firstNull)
+		//if there is no non-neutral planet with owner different from the first, game over.
+		if (firstOtherPlanet == planets.end())
 		{
-			Interface::showEnd(*tempPlanets.begin());
+			Interface::showEnd(*planets.begin());
 			end();
 		}
 	}
