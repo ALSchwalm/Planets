@@ -86,6 +86,14 @@ namespace Game
 
 	void update()
 	{
+
+		Interface::Field::update();
+#if _WIN32
+		//In windows terminals, trick to focus the CLI again
+		waddstr(Interface::CLI::lineWin, " \b");
+		wrefresh(Interface::CLI::lineWin);
+#endif
+
 		for (auto fleet = fleets.begin(); fleet != fleets.end(); )
 		{
 			auto fleet_ptr = *(fleet);
@@ -111,7 +119,10 @@ namespace Game
 					}
 				}
 				else
+				{
 					tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
+				}
+
 				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
 				fleet = fleets.erase(std::find(fleets.begin(), fleets.end(), fleet_ptr));
 				delete fleet_ptr;
@@ -134,12 +145,29 @@ namespace Game
 			aiPlayer->move();
 		}
 
-		Interface::Field::update();
-#if _WIN32
-		waddstr(Interface::CLI::lineWin, " \b");
-		wrefresh(Interface::CLI::lineWin);
-#endif
+		//copy elements to a vector so we can remove_if
+		std::vector<Planet::Planet*> tempPlanets(planets.begin(), planets.end());
 
+		//remove all neutral planets
+		auto firstNull = std::remove_if(tempPlanets.begin(), tempPlanets.end(),
+				[](Planet::Planet* planet){return planet->getOwner() == nullptr;});
+
+		//find first planet with different owner than the first
+		auto firstOtherPlanet = std::find_if(tempPlanets.begin(), firstNull,
+				[&](Planet::Planet* planet){return planet->getOwner() != (*tempPlanets.begin())->getOwner();});
+
+		//if the first other planet is neutral, the game if over
+		if (firstOtherPlanet == firstNull)
+		{
+			Interface::showEnd(*tempPlanets.begin());
+			end();
+		}
+	}
+
+	void end()
+	{
+		endwin();
+		exit(EXIT_SUCCESS);
 	}
 
 

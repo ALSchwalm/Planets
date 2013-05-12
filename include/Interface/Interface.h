@@ -9,12 +9,19 @@
 
 #include <memory>
 
+namespace Planet
+{
+	class Planet;
+}
+
+
 namespace Interface
 {
 
 	void initialize();
 	void refresh();
 	void pause();
+	void showEnd(Planet::Planet*);
 
 	extern WINDOW* mainwin;
 }

@@ -1,6 +1,7 @@
 
 #include "Interface/CLI/CLI.h"
 #include "Interface/CLI/Command.h"
+#include "Game/Game.h"
 #include <string>
 #include <cstdlib>
 
@@ -30,8 +31,7 @@ namespace Interface
 			switch(c)
 			{
 			case 27:	//esc
-				endwin();
-				exit(0);
+				Game::end();
 				break;
 			case 10:	//enter
 				runCommand(line);

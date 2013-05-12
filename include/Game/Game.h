@@ -14,6 +14,7 @@ namespace Game
 
 	void setup();
 	void update();
+	void end();
 
 	extern Player::HumanPlayer* player;
 	extern std::vector<Player::AIPlayer*> aiPlayers;

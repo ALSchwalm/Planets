@@ -38,6 +38,17 @@ namespace Interface
 		wclear(CLI::lineWin);
 	}
 
+	void showEnd(Planet::Planet*)
+	{
+		unsigned int max_x, max_y;
+		getmaxyx(Field::fieldWin, max_y, max_x);
+
+		mvwaddstr(Field::fieldWin, max_y/2, max_x/2, "GAME OVER");
+		wrefresh(Field::fieldWin);
+		getch();
+
+	}
+
 	void refresh()
 	{
 		wrefresh(CLI::lineWin);
