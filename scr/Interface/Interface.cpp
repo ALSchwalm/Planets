@@ -40,6 +40,7 @@ namespace Interface
 
 	void showEnd(Planet::Planet*)
 	{
+		Field::update();	//update the field so the last planet will show the new owner
 		unsigned int max_x, max_y;
 		getmaxyx(Field::fieldWin, max_y, max_x);
 
