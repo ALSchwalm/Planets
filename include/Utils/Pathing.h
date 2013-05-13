@@ -15,6 +15,7 @@ namespace Utils
 	{
 		std::pair<const int, const int>(0, 1),
 		std::pair<const int, const int>(0, -1),
+		std::pair<const int, const int>(0, 0),
 
 		std::pair<const int, const int>(1, 1),
 		std::pair<const int, const int>(1, -1),

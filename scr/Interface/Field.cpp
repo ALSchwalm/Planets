@@ -49,8 +49,6 @@ namespace Interface
 				waddstr(fieldWin, populationBuffer);
 			}
 
-
-
 			box(fieldWin, 0, 0);
 			wrefresh(fieldWin);
 		}

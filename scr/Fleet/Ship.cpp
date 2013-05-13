@@ -42,9 +42,13 @@ namespace Fleet
 				}
 			}
 
+//			moveValue[directionIndex] += Utils::getDistance(x+directions[directionIndex].first,
+//					y+directions[directionIndex].second, parentFleet->getDestination()->getX(),
+//					parentFleet->getDestination()->getY());
+
 			moveValue[directionIndex] += Utils::getDistance(x+directions[directionIndex].first,
-					y+directions[directionIndex].second, parentFleet->getDestination()->getX(),
-					parentFleet->getDestination()->getY());
+					y+directions[directionIndex].second, parentFleet->getX(),
+					parentFleet->getY());
 		}
 
 		unsigned int moveDirection = 0;

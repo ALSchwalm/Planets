@@ -151,7 +151,7 @@ namespace Game
 						(planet->getOwner() != nullptr);});
 
 		//if there is no non-neutral planet with owner different from the first, game over.
-		if (firstOtherPlanet == planets.end())
+		if (firstOtherPlanet == planets.end() and fleets.size() == 0)
 		{
 			Interface::showEnd(*planets.begin());
 			end();

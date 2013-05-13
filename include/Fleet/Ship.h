@@ -27,7 +27,7 @@ namespace Fleet
 		Fleet* parentFleet;
 		unsigned int x, y;
 
-		static constexpr float CLUMP_FACTOR = 1.2f;
+		static constexpr float CLUMP_FACTOR = 0.8f;
 
 	};
 }
