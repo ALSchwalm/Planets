@@ -29,7 +29,7 @@ namespace Fleet
 	bool Ship::move()
 	{
 
-		std::vector<int> moveValue(directions.size());
+		std::vector<float> moveValue(directions.size());
 
 		for(unsigned int directionIndex=0; directionIndex < directions.size(); ++directionIndex)
 		{
@@ -38,7 +38,7 @@ namespace Fleet
 				if (ship->getX() == x+directions[directionIndex].first and
 						ship->getY() == y+directions[directionIndex].second)
 				{
-					++moveValue[directionIndex];
+					moveValue[directionIndex]+=CLUMP_FACTOR;
 				}
 			}
 

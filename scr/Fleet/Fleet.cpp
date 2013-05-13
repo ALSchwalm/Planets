@@ -51,12 +51,21 @@ namespace Fleet
 		x+=move_direction.first;
 		y+=move_direction.second;
 
-		for (auto ship : ships)
+		for (auto ship =ships.begin(); ship != ships.end(); )
 		{
-			ship->move();
+			auto ship_ptr = *ship;
+			if (ship_ptr->move())
+			{
+				ship = ships.erase(std::find(ships.begin(), ships.end(), ship_ptr));
+				delete ship_ptr;
+			}
+			else
+			{
+				++ship;
+			}
 		}
 
-		if (destination->getX() == x and destination->getY() == y)
+		if (ships.size() == 0)//if (destination->getX() == x and destination->getY() == y)
 			return true;
 
 		return false;
