@@ -151,10 +151,16 @@ namespace Game
 						(planet->getOwner() != nullptr);});
 
 		//if there is no non-neutral planet with owner different from the first, game over.
-		if (firstOtherPlanet == planets.end() and fleets.size() == 0)
+		if (firstOtherPlanet == planets.end())
 		{
-			Interface::showEnd(*planets.begin());
-			end();
+			//Do not end the game if there are any ships from other players in flight
+			if (std::find_if(fleets.begin(), fleets.end(),
+					[&](Fleet::Fleet* fleet){return fleet->getOwner() != (*planets.begin())->getOwner();}) ==
+							fleets.end())
+			{
+				Interface::showEnd(*planets.begin());
+				end();
+			}
 		}
 	}
 
