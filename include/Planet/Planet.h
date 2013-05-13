@@ -54,7 +54,6 @@ namespace Planet
 		bool launchFleetPercent(Planet* destination);
 
 
-
 	private:
 		const unsigned int x;
 		const unsigned int y;

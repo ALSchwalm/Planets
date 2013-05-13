@@ -6,20 +6,17 @@
 
 namespace Fleet
 {
+	class Ship;
+
 	class Fleet
 	{
 	public:
 		Fleet(Player::BasePlayer* _owner,
 				Planet::Planet* _source,
 				Planet::Planet* _destination,
-				unsigned int population) :
-				x(_source->getX()),
-				y(_source->getY()),
-				population(population),
-				owner(_owner),
-				source(_source),
-				destination(_destination)
-		{}
+				unsigned int population);
+
+		~Fleet();
 
 		unsigned int getX() const {return x;}
 		unsigned int getY() const {return y;}
@@ -29,6 +26,8 @@ namespace Fleet
 		Player::BasePlayer* getOwner() const {return owner;}
 		Planet::Planet* getSource() const {return source;}
 		Planet::Planet* getDestination() const {return destination;}
+
+		std::vector<Ship*> & getShips(){return ships;}
 
 		/*
 		 * move() returns a bool representing whether the fleet
@@ -42,6 +41,8 @@ namespace Fleet
 		Player::BasePlayer* owner;
 		Planet::Planet* source;
 		Planet::Planet* destination;
+
+		std::vector<Ship*> ships;
 
 	};
 }

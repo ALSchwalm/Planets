@@ -20,7 +20,7 @@ namespace Interface
 
 	void initialize();
 	void refresh();
-	void pause();
+	void showPause();
 	void showEnd(Planet::Planet*);
 
 	extern WINDOW* mainwin;

@@ -13,7 +13,7 @@ int main()
 		Interface::initialize();
 		Game::setup();
 		Game::update();
-		Interface::pause();
+		Interface::showPause();
 
 		while(true)
 		{

@@ -1,19 +1,37 @@
 
 #include "Fleet/Fleet.h"
+#include "Fleet/Ship.h"
 #include "Utils/Pathing.h"
 #include <limits.h>
 
+using Utils::directions;
+
 namespace Fleet
 {
-	namespace
+
+	Fleet::Fleet(Player::BasePlayer* _owner,
+			Planet::Planet* _source,
+			Planet::Planet* _destination,
+			unsigned int population) :
+			x(_source->getX()),
+			y(_source->getY()),
+			population(population),
+			owner(_owner),
+			source(_source),
+			destination(_destination)
 	{
-		const std::vector<std::pair<int, int> > directions
+		for(unsigned int i=0; i < population; ++i)
 		{
-			std::pair<const int, const int>(0, 1),
-			std::pair<const int, const int>(0, -1),
-			std::pair<const int, const int>(1, 0),
-			std::pair<const int, const int>(-1, 0)
-		};
+			ships.push_back(new Ship(this, x, y));
+		}
+	}
+
+	Fleet::~Fleet()
+	{
+		for(auto ship : ships)
+		{
+			delete ship;
+		}
 	}
 
 	bool Fleet::move()
@@ -24,14 +42,19 @@ namespace Fleet
 
 		for (auto direction : directions)
 		{
-			if (Utils::getManhattanDistance(x+direction.first, y+direction.second, destination) < shortest_distance)
+			if (Utils::getDistance(x+direction.first, y+direction.second, destination->getX(), destination->getY()) < shortest_distance)
 			{
-				shortest_distance = Utils::getManhattanDistance(x+direction.first, y+direction.second, destination);
+				shortest_distance = Utils::getDistance(x+direction.first, y+direction.second, destination->getX(), destination->getY());
 				move_direction = direction;
 			}
 		}
 		x+=move_direction.first;
 		y+=move_direction.second;
+
+		for (auto ship : ships)
+		{
+			ship->move();
+		}
 
 		if (destination->getX() == x and destination->getY() == y)
 			return true;

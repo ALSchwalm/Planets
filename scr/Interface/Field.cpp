@@ -1,5 +1,6 @@
 
 #include "Interface/Field.h"
+#include "Fleet/Ship.h"
 #include "Game/Game.h"
 #include <cstdlib>
 
@@ -19,7 +20,18 @@ namespace Interface
 		void update()
 		{
 			wclear(fieldWin);
-			box(fieldWin, 0, 0);
+
+			for (auto fleet : Game::fleets)
+			{
+				for (auto ship : fleet->getShips())
+				{
+					if (ship->getOwner() == Game::player)
+						mvwaddch(fieldWin, ship->getX(), ship->getY(), '*');
+					else
+						mvwaddch(fieldWin, ship->getX(), ship->getY(), '.');
+				}
+			}
+
 			for (auto planet : Game::planets)
 			{
 				if (planet->getOwner() == Game::player)
@@ -37,14 +49,9 @@ namespace Interface
 				waddstr(fieldWin, populationBuffer);
 			}
 
-			for (auto fleet : Game::fleets)
-			{
-				if (fleet->getOwner() == Game::player)
-					mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '*');
-				else
-					mvwaddch(fieldWin, fleet->getX(), fleet->getY(), '.');
-			}
 
+
+			box(fieldWin, 0, 0);
 			wrefresh(fieldWin);
 		}
 	}

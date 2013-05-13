@@ -30,7 +30,7 @@ namespace Interface
 	    noecho();	//do not echo user intput to screen
 	}
 
-	void pause()
+	void showPause()
 	{
 		waddstr(CLI::lineWin, "Press any key to begin.");
 		wrefresh(CLI::lineWin);
@@ -44,7 +44,7 @@ namespace Interface
 		unsigned int max_x, max_y;
 		getmaxyx(Field::fieldWin, max_y, max_x);
 
-		mvwaddstr(Field::fieldWin, max_y/2, max_x/2, "GAME OVER");
+		mvwaddstr(Field::fieldWin, max_y/2, max_x/2-5, "GAME OVER");
 		wrefresh(Field::fieldWin);
 		getch();
 
