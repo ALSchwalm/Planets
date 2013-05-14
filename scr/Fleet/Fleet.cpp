@@ -34,7 +34,7 @@ namespace Fleet
 		}
 	}
 
-	bool Fleet::move()
+	unsigned int Fleet::move()
 	{
 
 		unsigned int shortest_distance = std::numeric_limits<unsigned int>::max();
@@ -51,11 +51,13 @@ namespace Fleet
 		x+=move_direction.first;
 		y+=move_direction.second;
 
+		unsigned int shipsLanded = 0;
 		for (auto ship =ships.begin(); ship != ships.end(); )
 		{
 			auto ship_ptr = *ship;
 			if (ship_ptr->move())
 			{
+				++shipsLanded;
 				ship = ships.erase(std::find(ships.begin(), ships.end(), ship_ptr));
 				delete ship_ptr;
 			}
@@ -65,9 +67,6 @@ namespace Fleet
 			}
 		}
 
-		if (ships.size() == 0)//if (destination->getX() == x and destination->getY() == y)
-			return true;
-
-		return false;
+		return shipsLanded;
 	}
 }

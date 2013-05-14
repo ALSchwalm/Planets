@@ -99,30 +99,34 @@ namespace Game
 			auto fleet_ptr = *(fleet);
 
 			/*
-			 * Fleet::move() returns true when a fleet has reached its destination
+			 * Fleet::move() returns and unsigned int equal to the number
+			 * of ships which landed with this move;
 			 */
 
-			if(fleet_ptr->move())
+			if(auto landed = fleet_ptr->move())
 			{
 				Planet::Planet* tempDestination = fleet_ptr->getDestination();
 				if (tempDestination->getOwner() != fleet_ptr->getOwner())	//If the destination is enemy/neutral
 				{
-					if (fleet_ptr->getPopulation() > tempDestination->getPopulation()) //If the planet has been taken
+					if (landed > tempDestination->getPopulation()) //If the planet has been taken
 					{
 
-						tempDestination->setPopulation(fleet_ptr->getPopulation() - tempDestination->getPopulation());
+						tempDestination->setPopulation(landed - tempDestination->getPopulation());
 						tempDestination->setOwner(fleet_ptr->getOwner()); //This also sets the letter/capitalization
 					}
 					else	//The planet has not been taken
 					{
-						tempDestination->setPopulation(tempDestination->getPopulation() - fleet_ptr->getPopulation());
+						tempDestination->setPopulation(tempDestination->getPopulation() - landed);
 					}
 				}
 				else
 				{
-					tempDestination->setPopulation(tempDestination->getPopulation() + fleet_ptr->getPopulation());
+					tempDestination->setPopulation(tempDestination->getPopulation() + landed);
 				}
+			}
 
+			if (fleet_ptr->getShips().size() == 0)
+			{
 				fleet_ptr->getOwner()->removeFleet(fleet_ptr);
 				fleet = fleets.erase(std::find(fleets.begin(), fleets.end(), fleet_ptr));
 				delete fleet_ptr;

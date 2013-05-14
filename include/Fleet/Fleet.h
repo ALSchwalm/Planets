@@ -30,10 +30,10 @@ namespace Fleet
 		std::vector<Ship*> & getShips(){return ships;}
 
 		/*
-		 * move() returns a bool representing whether the fleet
-		 * reached its destination in this move.
+		 * move() returns an unsigned int representing the number
+		 * of ships with landed this move
 		 */
-		bool move();
+		unsigned move();
 
 	private:
 		unsigned int x, y, population;
