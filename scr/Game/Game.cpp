@@ -3,6 +3,7 @@
 #include "Interface/Field.h"
 #include "Interface/CLI/CLI.h"
 #include "Utils/Config.h"
+#include "Utils/Pathing.h"
 
 #include <cstdlib>
 #include <time.h>
@@ -38,8 +39,7 @@ namespace Game
 	{
 		for (auto planet : planets)
 		{
-			if ((planet->getX() < x+PLANET_DENSITY and planet->getX() > x-PLANET_DENSITY ) and
-				(planet->getY() < y+PLANET_DENSITY and planet->getY() > y-PLANET_DENSITY ))
+			if ( Utils::getDistance(x, y, planet->getX(), planet->getY()) <= PLANET_DENSITY)
 				return false;
 		}
 		return true;
@@ -71,16 +71,11 @@ namespace Game
 			aiPlayers.push_back(new Player::AIPlayer(ID));
 		}
 
+		unsigned int max_x, max_y, temp_x, temp_y;
+		getmaxyx(Interface::Field::fieldWin, max_x, max_y);
+
 		for (unsigned int planet; planet < NUM_PLANETS; ++planet)
 		{
-			unsigned int max_x, max_y, temp_x, temp_y;
-			getmaxyx(Interface::Field::fieldWin, max_x, max_y);
-
-			/*
-			 * For reasons I cannot explain. This fails if I perform the
-			 * mod inside the new, or if I use LINES and COLS rather than
-			 * the above function.
-			 */
 			do
 			{
 				temp_x = rand()%(max_x-2)+1;
@@ -104,7 +99,7 @@ namespace Game
 			 * 2, so 2+96=98 = ASCII 'b'
 			 */
 			auto planet = std::find_if(planets.begin(), planets.end(),
-					[&](Planet::Planet* planet){return planet->getLetter() == aiPlayer->getID()+96;});
+					[&](Planet::Planet* planet){return static_cast<unsigned int>(planet->getLetter()) == aiPlayer->getID()+96;});
 			(*planet)->setOwner(aiPlayer);
 			(*planet)->setPopulation(AI_STARTING_POP);
 		}

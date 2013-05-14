@@ -40,8 +40,8 @@ namespace Utils
 		ini.Create("Game");
 		ini.Select("Game");
 		ini.Set("NUM_PLANETS", 15);
-		ini.Set("NUM_AI_PLAYERS", 1);
-		ini.Set("PLANET_DENSITY", 4);
+		ini.Set("NUM_AI_PLAYERS", 2);
+		ini.Set("PLANET_DENSITY", 6);
 		ini.Set("MAX_INITIAL_POP", 75);
 		ini.Set("MIN_INITIAL_POP", 5);
 		ini.Set("PLAYER_STARTING_POP", 100);
