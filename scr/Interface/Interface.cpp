@@ -20,7 +20,8 @@ namespace Interface
 	    if (has_colors())
 	    {
 	    	start_color();
-	    	init_pair(1, COLOR_CYAN, COLOR_BLACK);
+	    	init_pair(1, COLOR_GREEN, COLOR_BLACK);
+	    	init_pair(2, COLOR_RED, COLOR_BLACK);
 	    }
 	    CLI::initialize();
 	    Field::initialize();

@@ -55,8 +55,18 @@ namespace Game
 			throw(std::runtime_error("Insufficient planets for number of players."));
 		}
 
-		Game::player = new Player::HumanPlayer(0);
-		for (unsigned int ID=1; ID < NUM_AI_PLAYERS+1; ++ID)
+		if (NUM_PLANETS > 26)
+		{
+			throw(std::runtime_error("Too many planets. Valid NUM_PLANET range is 1-26."));
+		}
+
+		/*
+		 * Player IDs are 1 indexed as they correspond to the COLOR_PAIR used to color
+		 * thier planets/ships. ncurses uses a 1 indexed system for these pairs, and so
+		 * the IDs are 1 indexed.
+		 */
+		Game::player = new Player::HumanPlayer(1);
+		for (unsigned int ID=2; ID < NUM_AI_PLAYERS+2; ++ID)
 		{
 			aiPlayers.push_back(new Player::AIPlayer(ID));
 		}
@@ -81,15 +91,20 @@ namespace Game
 
 			planets.insert(new Planet::Planet(temp_x, temp_y,  planet+97, initial_pop));
 		}
+
 		auto playerPlanet = std::find_if(planets.begin(), planets.end(),
 				[](Planet::Planet* planet){return planet->getLetter() == 'a';});
 		(*playerPlanet)->setOwner(player);
 		(*playerPlanet)->setPopulation(PLAYER_STARTING_POP);
 
-		auto planet = planets.begin();
 		for(auto aiPlayer : aiPlayers)
 		{
-			std::advance(planet, 1);
+			/*
+			 * Player IDs are 1 indexed, and the first AI player should own 'b'. The first AI player ID is
+			 * 2, so 2+96=98 = ASCII 'b'
+			 */
+			auto planet = std::find_if(planets.begin(), planets.end(),
+					[&](Planet::Planet* planet){return planet->getLetter() == aiPlayer->getID()+96;});
 			(*planet)->setOwner(aiPlayer);
 			(*planet)->setPopulation(AI_STARTING_POP);
 		}

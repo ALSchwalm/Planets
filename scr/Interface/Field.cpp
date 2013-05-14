@@ -25,10 +25,11 @@ namespace Interface
 			{
 				for (auto ship : fleet->getShips())
 				{
+					attron(COLOR_PAIR(ship->getOwner()->getID()));
 					if (ship->getOwner() == Game::player)
-						mvwaddch(fieldWin, ship->getX(), ship->getY(), '*');
+						mvwaddch(fieldWin, ship->getX(), ship->getY(), '*' | COLOR_PAIR(ship->getOwner()->getID()));
 					else
-						mvwaddch(fieldWin, ship->getX(), ship->getY(), '.');
+						mvwaddch(fieldWin, ship->getX(), ship->getY(), '.' | COLOR_PAIR(ship->getOwner()->getID()));
 				}
 			}
 
@@ -36,13 +37,19 @@ namespace Interface
 			{
 				if (planet->getOwner() == Game::player)
 				{
-					attron(COLOR_PAIR(1));
-					mvwchgat(fieldWin, planet->getX(), planet->getY(), 1, A_BLINK, 1, NULL);
+					attron(COLOR_PAIR(planet->getOwner()->getID()));
+					mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter() | COLOR_PAIR(1));
 				}
 				else if (planet->getOwner() != nullptr)
-					mvwaddch(fieldWin, planet->getX(), planet->getY()-1, '_');
-
-				mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
+				{
+					attron(COLOR_PAIR(2));
+					mvwaddch(fieldWin, planet->getX(), planet->getY()-1, '_' | COLOR_PAIR(planet->getOwner()->getID()));
+					mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter() | COLOR_PAIR(planet->getOwner()->getID()));
+				}
+				else
+				{
+					mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
+				}
 
 				char populationBuffer[10];
 				sprintf(populationBuffer, "%d", planet->getPopulation());
