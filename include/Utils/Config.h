@@ -16,6 +16,7 @@ namespace Utils
 		typedef INI <std::string, std::string, int> ini_t;
 		ini_t ini;
 		Config();
+		void create_ini();
 	};
 }
 

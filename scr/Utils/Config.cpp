@@ -14,7 +14,9 @@ namespace Utils
 		ini(std::string("config.ini"))
 	{
 		if (!ini.Parse())
-			throw(std::runtime_error("Unable to locate config.ini"));
+		{
+			create_ini();
+		}
 	};
 
 
@@ -31,5 +33,31 @@ namespace Utils
 		{
 			return ini_value;
 		}
+	}
+
+	void Config::create_ini()
+	{
+		ini.Create("Game");
+		ini.Select("Game");
+		ini.Set("NUM_PLANETS", 15);
+		ini.Set("NUM_AI_PLAYERS", 1);
+		ini.Set("PLANET_DENSITY", 4);
+		ini.Set("MAX_INITIAL_POP", 75);
+		ini.Set("MIN_INITIAL_POP", 5);
+		ini.Set("PLAYER_STARTING_POP", 100);
+		ini.Set("AI_STARTING_POP", 100);
+
+		ini.Create("Planet");
+		ini.Select("Planet");
+		ini.Set("MAX_EGRESS", 100);
+		ini.Set("GROWTH_RATE", 3);
+
+		ini.Create("Ship");
+		ini.Select("Ship");
+		ini.Set("CLUMP_FACTOR", 80);
+
+
+		ini.Save("config.ini");
+
 	}
 }

@@ -34,7 +34,6 @@ namespace Player
 		void addFleet(Fleet::Fleet* fleet) {fleets.push_back(fleet);}
 		void removeFleet(Fleet::Fleet* fleet) { fleets.erase(std::remove(fleets.begin(), fleets.end(), fleet));}
 
-
 	protected:
 		const unsigned int ID;
 		float movePercent;
