@@ -75,8 +75,8 @@ namespace Planet
 		/*
 		 * How much population can leave a planet in one fleet
 		 */
-		static const unsigned int MAX_EGRESS = 100; //TODO read from config
-		static constexpr float GROWTH_RATE = 0.03f;
+		static const unsigned int MAX_EGRESS;
+		static const float GROWTH_RATE;
 	};
 }
 

@@ -2,10 +2,15 @@
 #include "Planet/Planet.h"
 #include "Game/Game.h"
 #include "Fleet/Fleet.h"
+#include "Utils/Config.h"
 #include <stdexcept>
+
 
 namespace Planet
 {
+	const unsigned int Planet::MAX_EGRESS =	Utils::Config::getInstance().getValue("Planet", "MAX_EGRESS");
+	const float Planet::GROWTH_RATE =	Utils::Config::getInstance().getValue("Planet", "GROWTH_RATE") *0.01f;
+
 	Planet::Planet(Player::BasePlayer* _owner, unsigned int _x, unsigned int _y, const char _letter, unsigned int initialPopulation) :
 			x(_x),
 			y(_y),

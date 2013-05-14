@@ -7,6 +7,8 @@ using Utils::directions;
 
 namespace Fleet
 {
+	float Ship::CLUMP_FACTOR = Utils::Config::getInstance().getValue("Ship", "CLUMP_FACTOR") * 0.01f;
+
 	Ship::Ship(Fleet* _parentFleet) :
 			parentFleet(_parentFleet),
 			x(0),

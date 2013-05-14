@@ -2,6 +2,7 @@
 #include "Game/Game.h"
 #include "Interface/Field.h"
 #include "Interface/CLI/CLI.h"
+#include "Utils/Config.h"
 
 #include <cstdlib>
 #include <time.h>
@@ -16,6 +17,15 @@
 
 namespace Game
 {
+	const unsigned int NUM_PLANETS = 			Utils::Config::getInstance().getValue("Game", "NUM_PLANETS");
+	const unsigned int NUM_AI_PLAYERS= 			Utils::Config::getInstance().getValue("Game", "NUM_AI_PLAYERS");
+	const unsigned int PLANET_DENSITY = 		Utils::Config::getInstance().getValue("Game", "PLANET_DENSITY");
+	const unsigned int MAX_INITIAL_POP = 		Utils::Config::getInstance().getValue("Game", "MAX_INITIAL_POP");
+	const unsigned int MIN_INITIAL_POP = 		Utils::Config::getInstance().getValue("Game", "MIN_INITIAL_POP");
+	const unsigned int PLAYER_STARTING_POP = 	Utils::Config::getInstance().getValue("Game", "PLAYER_STARTING_POP");
+	const unsigned int AI_STARTING_POP = 		Utils::Config::getInstance().getValue("Game", "AI_STARTING_POP");
+
+
 	Player::HumanPlayer* player = nullptr;
 	std::vector<Player::AIPlayer*> aiPlayers;
 	std::set<Fleet::Fleet*> fleets;
@@ -71,8 +81,10 @@ namespace Game
 
 			planets.insert(new Planet::Planet(temp_x, temp_y,  planet+97, initial_pop));
 		}
-		(*planets.begin())->setOwner(player);
-		(*planets.begin())->setPopulation(PLAYER_STARTING_POP);
+		auto playerPlanet = std::find_if(planets.begin(), planets.end(),
+				[](Planet::Planet* planet){return planet->getLetter() == 'a';});
+		(*playerPlanet)->setOwner(player);
+		(*playerPlanet)->setPopulation(PLAYER_STARTING_POP);
 
 		auto planet = planets.begin();
 		for(auto aiPlayer : aiPlayers)

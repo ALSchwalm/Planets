@@ -4,6 +4,7 @@
 #include "Player/BasePlayer.h"
 #include "Planet/Planet.h"
 #include "Fleet/Fleet.h"
+#include "Utils/Config.h"
 
 namespace Fleet
 {
@@ -27,7 +28,7 @@ namespace Fleet
 		Fleet* parentFleet;
 		unsigned int x, y;
 
-		static constexpr float CLUMP_FACTOR = 0.8f;
+		static float CLUMP_FACTOR;
 
 	};
 }
