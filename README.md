@@ -16,7 +16,7 @@ Controls
 
 Valid command syntax is of the form:
 
-{source planet(s) | "all"} {destination planet} [amount of population to move | percent of population to move]
+	{source planet(s) | "all"} {destination planet} [amount of population to move | percent of population to move]
 
 For example, the command "a b 10" will move 10 population from planet 'A' to planet 'b'. Multiple planets can be selected as sources by typing their names in sequence. So the command "abm c .20" will move 20% of the population from planets A, B and M to planet c. Selecting "all" as a source will move population from all owned planets.
 
