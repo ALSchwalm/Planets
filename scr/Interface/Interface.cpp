@@ -3,7 +3,6 @@
 #include "Interface/CLI/CLI.h"
 #include "Interface/Field.h"
 
-#include <iostream>
 #include <cstdlib>
 #include <stdexcept>
 
@@ -24,11 +23,12 @@ namespace Interface
 	    	init_pair(2, COLOR_RED, COLOR_BLACK);
 	    	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	    	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
+	    	init_pair(5, COLOR_BLUE, COLOR_BLACK);
 	    }
 	    CLI::initialize();
 	    Field::initialize();
 
-	    keypad(mainwin, true);
+	    keypad(CLI::lineWin, TRUE);
 	    wtimeout(CLI::lineWin, 0);
 	    noecho();	//do not echo user intput to screen
 	}
@@ -49,10 +49,12 @@ namespace Interface
 
 		mvwaddstr(Field::fieldWin, max_y/2, max_x/2-5, "GAME OVER.");
 		wrefresh(Field::fieldWin);
-		while (getch() != 10)
+		do
 		{
-			//To not exit until the user presses enter
-		}
+			auto c = getch();
+			if (c==10 or c==27) //Do not exit until the user presses enter/esc
+				break;
+		} while(true);
 
 	}
 

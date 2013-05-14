@@ -94,12 +94,12 @@ namespace Planet
 
 	bool Planet::launchFleetInt(Planet* destination)
 	{
-		return launchFleetInt(destination, population*owner->getMovePercent());
+		return launchFleetInt(destination, population*owner->getMovePercent()*0.01f);
 	}
 
 	bool Planet::launchFleetPercent(Planet* destination)
 	{
-		return launchFleetInt(destination, population*owner->getMovePercent());
+		return launchFleetInt(destination, population*owner->getMovePercent()*0.01f);
 	}
 
 	bool Planet::launchFleetPercent(Planet* destination, float size)

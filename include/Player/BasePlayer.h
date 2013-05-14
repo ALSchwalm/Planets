@@ -21,8 +21,10 @@ namespace Player
 	public:
 		BasePlayer(unsigned int _ID);
 
-		float getMovePercent() const {return movePercent;}
-		void setMovePercent(float _movePercent) {movePercent = _movePercent;}
+		unsigned int getMovePercent() const {return movePercent;}
+		void setMovePercent(unsigned int _movePercent) {movePercent = _movePercent;}
+		void incrementMovePercent();
+		void decrementMovePercent();
 
 		const unsigned int getID() const {return ID;}
 
@@ -36,7 +38,7 @@ namespace Player
 
 	protected:
 		const unsigned int ID;
-		float movePercent;
+		unsigned int movePercent;
 		std::vector<Planet::Planet*> planets;
 		std::vector<Fleet::Fleet*> fleets;
 	};

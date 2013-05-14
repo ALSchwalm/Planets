@@ -16,8 +16,10 @@ namespace Interface
 	{
 
 		void initialize();
+		void update();
 		extern WINDOW* CLIwin;
-		extern WINDOW*	lineWin;
+		extern WINDOW* lineWin;
+		extern WINDOW* percentWin;
 		void handleInput();
 	}
 }

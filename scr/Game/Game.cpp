@@ -110,6 +110,7 @@ namespace Game
 	{
 
 		Interface::Field::update();
+		Interface::CLI::update();
 #if _WIN32
 		//In windows terminals, trick to focus the CLI again
 		waddstr(Interface::CLI::lineWin, " \b");
