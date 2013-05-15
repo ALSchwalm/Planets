@@ -54,7 +54,7 @@ namespace Planet
 		if (fleetQueue.size() > 0)
 		{
 			Game::fleets.insert(fleetQueue.front());
-			owner->addFleet(fleetQueue.front());
+			fleetQueue.front()->getOwner()->addFleet(fleetQueue.front());
 			fleetQueue.pop();
 		}
 	}
@@ -70,7 +70,7 @@ namespace Planet
 		}
 		else if (size > MAX_EGRESS)
 		{
-			for (; size > MAX_EGRESS; size-=10)
+			for (; size > MAX_EGRESS; size-=MAX_EGRESS)
 			{
 				newFleet = new Fleet::Fleet(owner, this, destination, MAX_EGRESS);
 				fleetQueue.push(newFleet);

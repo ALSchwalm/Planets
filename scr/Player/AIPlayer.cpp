@@ -28,10 +28,11 @@ namespace Player
 	Planet::Planet* AIPlayer::getClosestPlanet(Planet::Planet* target)
 	{
 		auto closest = *planets.begin();
+
 		for(auto planet : planets)
 		{
-			if (Utils::getManhattanDistance(planet->getX(), planet->getY(), target) <
-					Utils::getManhattanDistance(closest->getX(), closest->getY(), target))
+			if (Utils::getDistance(planet->getX(), planet->getY(), target->getX(), target->getY()) <
+					Utils::getDistance(closest->getX(), closest->getY(), target->getX(), target->getY()))
 				closest = planet;
 		}
 		return closest;
@@ -39,7 +40,7 @@ namespace Player
 
 	void AIPlayer::move()
 	{
-		if (fleets.size() > 0)
+		if (fleets.size() > 0 or planets.size()==0)
 			return;
 
 		auto smallest = getSmallestPlanet();

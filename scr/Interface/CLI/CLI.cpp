@@ -67,7 +67,7 @@ namespace Interface
 
 		void update()
 		{
-			//wclear(percentWin);
+			wclear(percentWin);
 			box(percentWin, 0, 0);
 			auto percent = Utils::convert<std::string>(Game::player->getMovePercent());
 			percent+="%";

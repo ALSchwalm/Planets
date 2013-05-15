@@ -2,6 +2,7 @@
 #include "Interface/Field.h"
 #include "Fleet/Ship.h"
 #include "Game/Game.h"
+#include "Utils/Utils.h"
 #include <cstdlib>
 
 namespace Interface
@@ -35,15 +36,11 @@ namespace Interface
 
 			for (auto planet : Game::planets)
 			{
-				if (planet->getOwner() == Game::player)
+				if (planet->getOwner() != nullptr)
 				{
-					attron(COLOR_PAIR(planet->getOwner()->getID()));
-					mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter() | COLOR_PAIR(1));
-				}
-				else if (planet->getOwner() != nullptr)
-				{
-					attron(COLOR_PAIR(2));
-					mvwaddch(fieldWin, planet->getX(), planet->getY()-1, '_' | COLOR_PAIR(planet->getOwner()->getID()));
+
+					if (planet->getOwner() != Game::player)
+						mvwaddch(fieldWin, planet->getX(), planet->getY()-1, '_' | COLOR_PAIR(planet->getOwner()->getID()));
 					mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter() | COLOR_PAIR(planet->getOwner()->getID()));
 				}
 				else
@@ -51,9 +48,7 @@ namespace Interface
 					mvwaddch(fieldWin, planet->getX(), planet->getY(), planet->getLetter());
 				}
 
-				char populationBuffer[10];
-				sprintf(populationBuffer, "%d", planet->getPopulation());
-				waddstr(fieldWin, populationBuffer);
+				waddstr(fieldWin, Utils::convert<std::string>(planet->getPopulation()).c_str());
 			}
 
 			box(fieldWin, 0, 0);

@@ -2,11 +2,11 @@
 #include "Interface/CLI/Command.h"
 #include "Interface/CLI/CLI.h"
 #include "Planet/Planet.h"
+#include "Game/Game.h"
 #include <vector>
 #include <sstream>
 #include <cstdlib>
 
-#include "Game/Game.h" //TODO remove this
 
 namespace Interface
 {

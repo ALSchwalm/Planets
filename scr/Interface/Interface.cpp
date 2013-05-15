@@ -24,6 +24,7 @@ namespace Interface
 	    	init_pair(3, COLOR_YELLOW, COLOR_BLACK);
 	    	init_pair(4, COLOR_MAGENTA, COLOR_BLACK);
 	    	init_pair(5, COLOR_BLUE, COLOR_BLACK);
+	    	init_pair(6, COLOR_CYAN, COLOR_BLACK);
 	    }
 	    CLI::initialize();
 	    Field::initialize();
@@ -47,7 +48,7 @@ namespace Interface
 		unsigned int max_x, max_y;
 		getmaxyx(Field::fieldWin, max_y, max_x);
 
-		mvwaddstr(Field::fieldWin, max_y/2, max_x/2-5, "GAME OVER.");
+		mvwaddstr(Field::fieldWin, max_y/2, max_x/2-5, "GAME OVER");
 		wrefresh(Field::fieldWin);
 		do
 		{

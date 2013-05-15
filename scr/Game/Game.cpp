@@ -172,6 +172,10 @@ namespace Game
 			aiPlayer->move();
 		}
 
+		/*
+		 * Begin check for GAME OVER conditions
+		 */
+
 		//find first non-neutral planet with different owner than the first
 		auto firstOtherPlanet = std::find_if(planets.begin(), planets.end(),
 				[&](Planet::Planet* planet){return (planet->getOwner() != (*planets.begin())->getOwner()) and
