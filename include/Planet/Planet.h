@@ -53,6 +53,7 @@ namespace Planet
 		bool launchFleetPercent(Planet* destination, float size);
 		bool launchFleetPercent(Planet* destination);
 
+		static const float GROWTH_RATE;
 
 	private:
 		const unsigned int x;
@@ -76,7 +77,7 @@ namespace Planet
 		 * How much population can leave a planet in one fleet
 		 */
 		static const unsigned int MAX_EGRESS;
-		static const float GROWTH_RATE;
+
 	};
 }
 

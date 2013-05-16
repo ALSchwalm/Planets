@@ -14,8 +14,11 @@ namespace Player
 		void move();
 
 	private:
-		Planet::Planet* getSmallestPlanet();
+		Planet::Planet* getSmallestPlanet(bool onlyOwned=false);
+		Planet::Planet* getSmallestOwnedPlanet();
 		Planet::Planet* getClosestPlanet(Planet::Planet*);
+		unsigned int getLargestDistance(Planet::Planet*);
+		unsigned int getTotalPopulation();
 	};
 }
 
